@@ -1,0 +1,587 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Başlangıç CSS tanımlamaları */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    background-color: #0a8ecb;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+    font-family: 'Playfair Display', serif;
+    text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    background-color: #a8a8a87d;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-image: linear-gradient(45deg, rgb(0, 104, 160), rgb(7, 86, 205));
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+::-webkit-scrollbar {
+    height: 10px;
+}
+
+/* İçerik CSS */
+
+.quote-box {
+    background: #fff;
+    width: 700px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 10px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+.quote-box h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.quote-box h2::after {
+    content: '';
+    width: 75px;
+    height: 3px;
+    border-radius: 3px;
+    background: rgb(23, 124, 229);
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.quote-box blockquote {
+    font-size: 26px;
+    min-height: 110px;
+}
+
+.quote-box blockquote::before,
+.quote-box blockquote::after {
+    content: '"';
+}
+
+.quote-box #author {
+    display: block;
+    margin-top: 10px;
+    float: right;
+    position: relative;
+}
+
+.quote-box #author::before {
+    content: '';
+    width: 20px;
+    height: 2px;
+    background: rgb(23, 124, 229);
+    position: absolute;
+    top: 50%;
+    left: -30px;
+
+}
+
+.quote-box div {
+    width: 100%;
+    margin-top: 70px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#save-btn {
+    height: 20px;
+    width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 21px 30px;
+    border: 0;
+    border-radius: 5px;
+    background-image: linear-gradient(45deg, rgb(218, 134, 24), rgb(255, 232, 27));
+    color: #000000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: 0.3s all ease;
+}
+
+#new-quote-btn {
+    border: 0;
+    height: 42px;
+    width: 140px;
+    border-radius: 5px;
+    background-image: linear-gradient(45deg, rgb(34, 220, 102), rgb(0, 163, 71));
+    color: #ededed;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+#new-quote-btn:hover {
+    transform: scale(1.1);
+}
+
+#save-btn h3 {
+    font-weight: 500;
+}
+
+#save-btn:hover {
+    transform: scale(1.1);
+}
+
+#save-btn span {
+    width: 25px;
+    margin-right: 7px;
+}
+
+/* Favoriler */
+
+#favorites-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 0;
+    border-radius: 8px;
+    background-image: linear-gradient(45deg, rgb(240, 122, 12), rgb(240, 199, 18));
+    box-shadow: 0 3px 20px 0px rgba(187, 187, 187, 0.226);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#favorites-btn:hover {
+    transform: scale(1.05);
+}
+
+
+/* Favorite Quotes List */
+
+.favorite-quotes-box {
+    position: absolute; width: 700px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px 0px rgba(0, 0, 0, 0.15);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40px;
+    display: none;
+}
+
+.favorite-quotes-box h2 {
+    text-align: center;
+}
+
+.allquote {
+    width: 100%;
+    height: 500px;
+    overflow: auto;
+    padding: 20px 30px;
+    margin-top: 20px;
+    background-image: url("");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#exitFromFavorite {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border: 0;
+    border-radius: 20px;
+    padding: 5px 20px;
+    background-image: linear-gradient(45deg, rgb(0, 104, 160), rgb(7, 86, 205));
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s all ease;
+}
+
+#exitFromFavorite span {
+    font-size: 30px;
+    margin-top: 3px;
+}
+
+#exitFromFavorite:hover {
+    transform: scale(1.05);
+}
+
+#quote-list li {
+    list-style: none;
+    border: 1px solid rgba(60, 60, 60, 0.401);
+    margin-top: 20px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 7px;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+
+.quote-options {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-left: 1px solid rgba(128, 128, 128, 0.499);
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.quote-options span:nth-child(1) {
+    color: rgb(11, 177, 77);
+    font-size: 30px;
+}
+
+.quote-options span:nth-child(2) {
+    color: rgb(222, 55, 29);
+    font-size: 35px;
+}
+
+.favorite-quotes-box li:hover {
+    box-shadow: 0 10px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+/* Bütün Notları Sil */
+
+#allQuotesDelete {
+    position: absolute;
+    bottom: 9px;
+    right: 276px;
+    display: none;
+    align-content: center;
+    justify-content: center;
+    border: 0;
+    background-image: linear-gradient(45deg, rgb(242, 29, 29), rgb(190, 10, 10));
+    border-radius: 12px;
+    color: #fff;
+    font-size: 18px;
+    padding: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#allQuotesDelete span:nth-child(2) {
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+/* Bildirimler */
+
+#info-alert {
+    width: 430px;
+    height: 130px;
+    background: rgba(255, 255, 255, 0.94);
+    position: absolute;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    box-shadow: 0 10px 20px 0px rgba(0, 0, 0, 0.15);
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    display: none;
+}
+
+#info-alert #info-message {
+    font-size: 18px;
+}
+
+#info-alert #buttons {
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: space-evenly;
+    margin-top: 20px;
+
+}
+
+#info-alert button {
+    padding: 5px 20px;
+    border-radius: 4px;
+    border: 0;
+    font-size: 23px;
+    color: #fff;
+    cursor: pointer;
+}
+
+#info-alert #buttons button:nth-child(1) {
+    background-image: linear-gradient(45deg, rgb(11, 186, 55), rgb(0, 168, 98));
+}
+
+#info-alert #buttons button:nth-child(2) {
+    background-image: linear-gradient(45deg, rgb(205, 26, 26), rgb(177, 24, 24));
+}
+
+/* Overlay */
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(48, 48, 48, 0.422);
+    z-index: 998;
+}
+
+
+
+
+
+/* Benim hakkımda bilgiler CSS kodları */
+
+.button-container {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.round-button {
+    width: 60px;
+    height: 60px;
+    background-color: #005cb9f5;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px 6px rgba(0, 0, 0, 0.1);
+
+}
+
+.round-button span {
+    font-size: 35px;
+}
+
+.round-button:hover {
+    background-color: #0056b3;
+    transition: 0.4s all;
+    box-shadow: 0 4px 16px 6px rgba(0, 0, 0, 0.314);
+}
+
+#info-buttons {
+    position: absolute;
+    top: -30px;
+    right: -100px;
+    display: none;
+    margin: 10px auto;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+    animation: slideIn 0.3s forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(10px, 0);
+    }
+}
+
+
+.info-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 5px 10px;
+    background-color: #e9e9e9;
+    box-shadow: 0 4px 10px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+    color: rgb(32, 32, 32);
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: transform 0.3s ease;
+    height: 40px;
+}
+
+.info-button .image {
+    width: 30px;
+    height: 90%;
+    margin-left: 4px;
+
+}
+
+.info-logos {
+    width: 100%;
+    height: 100%;
+
+}
+
+.info-button:hover {
+    transform: scale(1.1);
+}
+
+
+
+
+
+/* Media Sorguları */
+
+@media (max-width: 717px) {
+    .quote-box {
+        width: 540px;
+        top: 40%;
+    }
+
+    .favorite-quotes-box {
+        width: 500px;
+        top: 46%;
+    }
+
+    #allQuotesDelete {
+        right: 175px;
+    }
+
+}
+
+
+@media (max-width: 563px) {
+    .quote-box {
+        width: 400px;
+        top: 40%;
+    }
+
+    .favorite-quotes-box {
+        width: 400px;
+        top: 46%;
+    }
+
+    #allQuotesDelete {
+        right: 125px;
+    }
+
+    #exitFromFavorite {
+        top: 10px;
+        left: 10px;
+    }
+
+    #exitFromFavorite span {
+        font-size: 20px;
+        margin-top: 3px;
+    }
+
+    .allquote {
+        background-size: contain;
+    }
+
+    #info-alert {
+        width: 300px;
+        height: 170px;
+    }
+    #info-alert #info-message p{
+    font-size: 16px;
+    padding: 10px;
+    }
+
+}
+
+@media (max-width: 417px) {
+    .quote-box {
+        width: 300px;
+        top: 40%;
+    }
+
+    .quote-box h2 {
+        font-size: 26px;
+        margin-top: 20px;
+    }
+
+    #quote {
+        font-size: 24px;
+    }
+
+    #author {
+        font-size: 17px;
+
+    }
+
+    .optionsbutton {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #new-quote-btn {
+        width: 230px;
+    }
+
+    #save-btn {
+        margin-top: 10px;
+        width: 230px;
+    }
+
+    .favorite-quotes-box {
+        padding: 10px;
+        width: 300px;
+    }
+
+    .favorite-quotes-box h2 {
+        font-size: 15px;
+    }
+
+    .allquote {
+        background-size: contain;
+        padding: 20px 10px;
+    }
+    #exitFromFavorite {
+        top: 10px;
+        left: 10px;
+        padding: 6px 10px;
+    }
+
+    #quote-list li{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .quote-options{
+        margin-top: 14px;
+        border-top: 2px solid rgba(195, 195, 195, 0.455);
+        border-left: 0;
+        
+    }
+    #allQuotesDelete{
+        right: 50px;
+        width: 200px;
+        border-radius: 10px;
+    }
+ 
+}
